@@ -26,6 +26,7 @@ public class EmailSender {
         String recipientEmails = System.getProperty("recipientEmails");
 
         String htmlFilePath = System.getProperty("user.dir") + "\\TestExecutionSummary.html";
+        String excelFilePath = System.getProperty("ResulExcelPath");
         String subject = System.getProperty("subject");
         String htmlContent = getMailHtml();
 
@@ -46,6 +47,9 @@ public class EmailSender {
             MimeBodyPart htmlPart = new MimeBodyPart();
             htmlPart.setContent(htmlContent, "text/html");
             multipart.addBodyPart(htmlPart);
+
+              // or wherever your Excel file is
+             attachFileToEmail(multipart, excelFilePath, "TestSummary.xlsx");
 
             // HTML report as attachment
             attachFileToEmail(multipart, htmlFilePath, "TestExecutionSummary.html");
