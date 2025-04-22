@@ -196,9 +196,9 @@ public class SummaryReportGenerator
 	{
 		if (productName.toLowerCase().contains("marketing star"))
 		{
-			return "style=\"margin: 5px;padding-left: 100px;padding-bottom: 30px;height: 90px;width: 300px;\"";
+			return "style=\"margin: 5px;padding-left: 5px;padding-bottom: 30px;height: 80px;width: 300px;\"";
 		}else {
-			return "style=\"margin: 5px;padding-left: 180px;padding-bottom: 30px;height: 90px;width: 300px;\"";
+			return "style=\"style=\"margin: 5px;padding-left: 10px;padding-bottom: 30px;height: 80px;width: 300px;\"";
 		}
 	}
 	
