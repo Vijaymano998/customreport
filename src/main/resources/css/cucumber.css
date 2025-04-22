@@ -10,11 +10,10 @@ body {
 }
 
 #logo {
-    margin: 5px;
-    padding-left: 9px;
-    padding-bottom: 14px;
-    height: 62px;
-    width: 290px;
+    margin: 8px;
+    padding: 25px;
+    height: 80px;
+    width: 200px;
     /* animation: rotateLogo 2s linear normal; */
   }
 
