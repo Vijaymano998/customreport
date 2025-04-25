@@ -16,9 +16,9 @@ public class SummaryReportGenerator
 {
 	
 	static String html = "";
-	public static void generateReport(int pass, int fail, int noRun, String duration)
+	public static void generateReport(int pass, int fail, int noRun, String duration,String startTime)
 	{
-		String html = customReportHtml(pass, fail, noRun, duration);
+		String html = customReportHtml(pass, fail, noRun, duration,startTime);
 
 		String value = System.getProperty("user.dir") + "\\TestExecutionSummary.html";
 		System.out.println(value);
@@ -44,11 +44,11 @@ public class SummaryReportGenerator
 		return String.format("%.2f", (count * 100.0 / total)) + "%";
 	}
 
-	public static String customReportHtml(int pass, int fail, int noRun, String duration)
+	public static String customReportHtml(int pass, int fail, int noRun, String duration,String startTime)
 	{
 		String productName = System.getProperty("ProductName");
 		int total = pass + fail + noRun;	
-		html = getReportHtml(productName, pass, fail, noRun, total, duration);
+		html = getReportHtml(productName, pass, fail, noRun, total, duration,startTime);
 		getCssAndJsPath("${JQUERY_JS}", "src/main/resources/js/jquery.min.js");
 		getCssAndJsPath("${TABLESORTER_JS}", "/js/jquery.tablesorter.min.js");
 		getCssAndJsPath("${BOOTSTRAP_CSS}", "/css/bootstrap.min.css");
@@ -196,14 +196,14 @@ public class SummaryReportGenerator
 	{
 		if (productName.toLowerCase().contains("marketing star"))
 		{
-			return "style=\"margin: 5px;padding-left: 100px;padding-bottom: 30px;height: 90px;width: 300px;\"";
+			return "style=\"margin: 1px;padding-left: 5px;padding-bottom: 70px;height: 140px;width: 400px;\"";
 		}else {
-			return "style=\"margin: 5px;padding-left: 180px;padding-bottom: 30px;height: 90px;width: 300px;\"";
+			return "style=\"style=\"margin: 5px;padding-left: 10px;padding-bottom: 30px;height: 80px;width: 300px;\"";
 		}
 	}
 	
 	
-	public static String getReportHtml(String productName,int pass,int fail,int noRun,int total,String duration)
+	public static String getReportHtml(String productName,int pass,int fail,int noRun,int total,String duration,String startTime)
 	{
 		return "<!DOCTYPE html>\n"
 				+ "<html>\n"
@@ -284,7 +284,8 @@ public class SummaryReportGenerator
 				+ "  <body>\n"
 				+ "    <div id=\"header\">\n"
 				+ "      <img id=\"resultickslogo\" src=\"https://www.resulticks.com/images/logos/resulticks-logo-blue.svg\" />\n"
-				+ "      <h1>AUTOMATION - TEST SUMMARY REPORT</h1>\n"
+				+ "      <h1>AUTOMATION - TEST SUMMARY REPORT"
+				+"       <p>Environment : "+System.getProperty("environment")+" || Release Version: "+System.getProperty("version")+" || Browser: "+System.getProperty("browser")+" || Account: "+System.getProperty("Account")+" || Username: "+System.getProperty("UserName")+" || Requestor: "+System.getProperty("user.name")+",Date & time : "+startTime+"</p></h1>\n"
 				+ "      <img id=\"logo\" "+getStyle(productName)+" src=\""+"{{logoImage}}"+"\" />\n"
 				+ "    </div>\n"
 				+ "\n"
@@ -300,11 +301,11 @@ public class SummaryReportGenerator
 				+ "              <tr>\n"
 				+ "                <th>Module</th>\n"
 				+ "                <th class=\"passed\">Passed</th>\n"
-				+ "                <th class=\"passed\">Passed percentage</th>\n"
+				+ "                <th class=\"passed\">Passed %</th>\n"
 				+ "                <th class=\"failed\">Failed</th>\n"
-				+ "                <th class=\"failed\">Failed percentage</th>\n"
+				+ "                <th class=\"failed\">Failed %</th>\n"
 				+ "                <th class=\"skipped\">Skipped</th>\n"
-				+ "                <th class=\"skipped\">Skipped percentage</th>\n"
+				+ "                <th class=\"skipped\">Skipped %</th>\n"
 				+ "                <th class=\"total\">Total</th>\n"
 				+ "                <th>Duration</th>\n"
 				+ "              </tr>\n"
