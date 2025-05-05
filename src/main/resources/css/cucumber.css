@@ -12,7 +12,7 @@ body {
 #logo {
     margin: 5px;
     height: 62px;
-    width: 130px;
+    width: 100px;
     /* animation: rotateLogo 2s linear normal; */
   }
 
@@ -40,7 +40,7 @@ body {
   
   #header p{
     margin:9px;
-    font-size: 70%;
+    font-size: 50%;
     text-align: center;
     color: black;
     width: 940px;
