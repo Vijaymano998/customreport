@@ -200,6 +200,7 @@ public class SummaryReportGenerator
 		// }else {
 		// 	return "style=\"style=\"margin: 5px;padding-left: 10px;padding-bottom: 30px;height: 80px;width: 300px;\"";
 		// }
+		return "";
 	}
 	
 	
