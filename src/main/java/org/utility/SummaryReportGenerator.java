@@ -77,7 +77,7 @@ public class SummaryReportGenerator
 		if (productName.equalsIgnoreCase("resul"))
 		{
 			return System.getProperty("resullogo");
-		} else if (productName.equalsIgnoreCase("marketing star"))
+		} else if (productName.equalsIgnoreCase("marketingstar"))
 		{
 			return System.getProperty("marketingstarlogo");
 		} else if (productName.equalsIgnoreCase("smartdx"))
@@ -95,7 +95,7 @@ public class SummaryReportGenerator
 		if (productName.equalsIgnoreCase("resul"))
 		{
 			return "/images/resul.svg";
-		} else if (productName.equalsIgnoreCase("marketing star"))
+		} else if (productName.equalsIgnoreCase("marketingstar"))
 		{
 			return "/images/marketingstar.svg";
 		} else if (productName.equalsIgnoreCase("smartdx"))
@@ -192,18 +192,6 @@ public class SummaryReportGenerator
 		}
 	}
 
-	public static String getStyle(String productName)
-	{
-		// if (productName.toLowerCase().contains("marketing star"))
-		// {
-		// 	return "style=\"margin: 1px;padding-left: 5px;padding-bottom: 70px;height: 140px;width: 400px;\"";
-		// }else {
-		// 	return "style=\"style=\"margin: 5px;padding-left: 10px;padding-bottom: 30px;height: 80px;width: 300px;\"";
-		// }
-		return "";
-	}
-	
-	
 	public static String getReportHtml(String productName,int pass,int fail,int noRun,int total,String duration,String startTime)
 	{
 		return "<!DOCTYPE html>\n"
@@ -286,8 +274,8 @@ public class SummaryReportGenerator
 				+ "    <div id=\"header\">\n"
 				+ "      <img id=\"resultickslogo\" src=\"https://www.resulticks.com/images/logos/resulticks-logo-blue.svg\" />\n"
 				+ "      <h1>AUTOMATION - TEST SUMMARY REPORT"
-				+"       <p>Environment : "+System.getProperty("environment")+" || Release Version: "+System.getProperty("version")+" || Browser: "+System.getProperty("browser")+" || Account: "+System.getProperty("Account")+" || Username: "+System.getProperty("UserName")+" || Requestor: "+System.getProperty("user.name")+",Date & time : "+startTime+"</p></h1>\n"
-				+ "      <img id=\"logo\" "+getStyle(productName)+" src=\""+"{{logoImage}}"+"\" />\n"
+				+"       <p>Environment : "+System.getProperty("environment")+" || Release Version: "+System.getProperty("ReleaseVersion")+" || Browser: "+System.getProperty("Browser")+" || Account: "+System.getProperty("Account")+" || Username: "+System.getProperty("UserName")+" || Requestor: "+System.getProperty("user.name")+",Date & time : "+startTime+"</p></h1>\n"
+				+ "      <img id=\"logo src=\""+"{{logoImage}}"+"\" />\n"
 				+ "    </div>\n"
 				+ "\n"
 				+ "    <div class=\"container-fluid\" id=\"report\">\n"
@@ -297,7 +285,7 @@ public class SummaryReportGenerator
 				+ "            <thead>\n"
 				+ "              <tr class=\"header dont-sort\">\n"
 				+ "                <th></th>\n"
-				+ "                <th colspan=\"8\">Status</th>\n"
+				+ "                <th colspan=\"8\">Overall Summary</th>\n"
 				+ "              </tr>\n"
 				+ "              <tr>\n"
 				+ "                <th>Module</th>\n"
@@ -331,42 +319,118 @@ public class SummaryReportGenerator
 				+ "\n"
 				+ "    <div id=\"report-lead\" class=\"container-fluid\">\n"
 				+ "      <div class=\"col-md-10 col-md-offset-1\">\n"
-				+ "        <h2>Specifications & Statistics</h2>\n"
-				+ "        <p>The following graphs show passing and failing statistics</p>\n"
+				+ "        <h2>Module-Wise Summary</h2>\n"
 				+ "      </div>\n"
 				+ "    </div>\n"
 				+ "\n"
-				+ "    <div>\n"
-				+ "      <div id=\"footer\">\n"
-				+ "        <div class=\"col-md-3 col-md-offset-2\">\n"
-				+ "          <table class=\"table table-bordered\" id=\"classifications\">\n"
-				+ "            <tbody>\n"
-				+ "              <tr class=\"info\">\n"
-				+ "                <th>Test</th>\n"
-				+ "                <td>Functional Testing</td>\n"
-				+ "              </tr>\n"
-				+ "              <tr class=\"info\">\n"
-				+ "                <th>Version</th>\n"
-				+ "                <td>"+System.getProperty("version")+"</td>\n"
-				+ "              </tr>\n"
-				+ "              <tr class=\"info\">\n"
-				+ "                <th>Browser</th>\n"
-				+ "                <td>"+System.getProperty("browser")+"</td>\n"
-				+ "              </tr>\n"
-				+ "              <tr class=\"info\">\n"
-				+ "                <th>Environment</th>\n"
-				+ "                <td>"+System.getProperty("environment")+"</td>\n"
-				+ "              </tr>\n"
-				+ "              <tr class=\"info\">\n"
-				+ "                <th>Requested by</th>\n"
-				+ "                <td>"+System.getProperty("user.name")+"</td>\n"
-				+ "              </tr>\n"
-				+ "            </tbody>\n"
-				+ "          </table>\n"
-				+ "        </div>\n"
-				+ "        <div id=\"piechart\" style=\"width: 500px; height: 300px;\"></div>\n"
+				+ "    <div id=\"footer\">\n"
+				+ "      <div id=\"charts\"></div>\n"
+				+ "      <div\n"
+				+ "        id=\"piechart\"\n"
+				+ "        style=\"\n"
+				+ "          width: 150%;\n"
+				+ "          height: 300px;\n"
+				+ "          display: flex;\n"
+				+ "          align-items: center;\n"
+				+ "          justify-content: center;\n"
+				+ "          padding-left: 130px;\n"
+				+ "        \"\n"
+				+ "      >\n"
+				+ "        Pie chart goes here\n"
 				+ "      </div>\n"
 				+ "    </div>\n"
+				+ "\n"
+				+ "    <script>\n"
+				+ "      const div = document.getElementById(\"charts\");\n"
+				+ "\n"
+				+ "      const row = document.createElement(\"div\");\n"
+				+ "      row.className = \"row\";\n"
+				+ "\n"
+				+ "      const col = document.createElement(\"div\");\n"
+				+ "      col.className = \"col-md-10 col-md-offset-1\";\n"
+				+ "      row.appendChild(col);\n"
+				+ "      div.appendChild(row);\n"
+				+ "\n"
+				+ "      const table = document.createElement(\"table\");\n"
+				+ "      table.id = \"tablesorter\";\n"
+				+ "      table.className = \"stats-table table-hover\";\n"
+				+ "      table.style.width = \"140%\";\n"
+				+ "\n"
+				+ "      // Table head\n"
+				+ "      const thead = document.createElement(\"thead\");\n"
+				+ "\n"
+				+ "      const trHead1 = document.createElement(\"tr\");\n"
+				+ "      trHead1.className = \"header dont-sort\";\n"
+				+ "      trHead1.innerHTML = `<th></th><th colspan=\"8\">Status</th>`;\n"
+				+ "      thead.appendChild(trHead1);\n"
+				+ "\n"
+				+ "      const trHead2 = document.createElement(\"tr\");\n"
+				+ "      const headers = [\n"
+				+ "        \"Modules\", \"Passed\", \"Passed %\", \"Failed\", \"Failed %\", \n"
+				+ "        \"Skipped\", \"Skipped %\", \"Total\", \"Duration\"\n"
+				+ "      ];\n"
+				+ "      headers.forEach((text) => {\n"
+				+ "        const th = document.createElement(\"th\");\n"
+				+ "        th.className = text.toLowerCase();\n"
+				+ "        th.textContent = text;\n"
+				+ "        trHead2.appendChild(th);\n"
+				+ "      });\n"
+				+ "      thead.appendChild(trHead2);\n"
+				+ "      table.appendChild(thead);\n"
+				+ "\n"
+				+ "      // Body\n"
+				+ "      const tbody = document.createElement(\"tbody\");\n"
+				+ "\n"
+				+ "      const sampleInnerMap = new Map([\n"
+				+ "        [\"Passed\", \"25\"],\n"
+				+ "        [\"PassedPercentage\", \"25%\"],\n"
+				+ "        [\"Failed\", \"30\"],\n"
+				+ "        [\"FailedPercentage\", \"30%\"],\n"
+				+ "        [\"Skipped\", \"50\"],\n"
+				+ "        [\"SkippedPercentage\", \"50%\"],\n"
+				+ "      ]);\n"
+				+ "\n"
+				+ "      const myMap = new Map([\n"
+				+ "        [\"Target List\", sampleInnerMap],\n"
+				+ "        [\"Suppression List\", sampleInnerMap],\n"
+				+ "        [\"Adhoc List\", sampleInnerMap],\n"
+				+ "      ]);\n"
+				+ "\n"
+				+ "      for (const [methodName, innerMap] of myMap.entries()) {\n"
+				+ "        const tr = document.createElement(\"tr\");\n"
+				+ "\n"
+				+ "        const tdMethod = document.createElement(\"td\");\n"
+				+ "        tdMethod.textContent = methodName;\n"
+				+ "        tr.appendChild(tdMethod);\n"
+				+ "\n"
+				+ "        const passed = parseInt(innerMap.get(\"Passed\")) || 0;\n"
+				+ "        const failed = parseInt(innerMap.get(\"Failed\")) || 0;\n"
+				+ "        const skipped = parseInt(innerMap.get(\"Skipped\")) || 0;\n"
+				+ "\n"
+				+ "        const total = passed + failed + skipped;\n"
+				+ "        const duration = total * 5; // Dummy duration logic\n"
+				+ "\n"
+				+ "        tr.appendChild(createTd(passed));\n"
+				+ "        tr.appendChild(createTd(innerMap.get(\"PassedPercentage\")));\n"
+				+ "        tr.appendChild(createTd(failed));\n"
+				+ "        tr.appendChild(createTd(innerMap.get(\"FailedPercentage\")));\n"
+				+ "        tr.appendChild(createTd(skipped));\n"
+				+ "        tr.appendChild(createTd(innerMap.get(\"SkippedPercentage\")));\n"
+				+ "        tr.appendChild(createTd(total));\n"
+				+ "        tr.appendChild(createTd(duration));\n"
+				+ "\n"
+				+ "        tbody.appendChild(tr);\n"
+				+ "      }\n"
+				+ "\n"
+				+ "      table.appendChild(tbody);\n"
+				+ "      col.appendChild(table);\n"
+				+ "\n"
+				+ "      function createTd(text) {\n"
+				+ "        const td = document.createElement(\"td\");\n"
+				+ "        td.textContent = text;\n"
+				+ "        return td;\n"
+				+ "      }\n"
+				+ "    </script>\n"
 				+ "  </body>\n"
 				+ "</html>";
 	}
